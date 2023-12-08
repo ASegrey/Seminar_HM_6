@@ -33,9 +33,67 @@
                     System.Console.WriteLine($"Измененная строка => {ModString(newRandomString)}");
                     break;
                 }
+                case 3:
+                {
+                    System.Console.WriteLine("Задача 3: Задайте произвольную строку. Выясните,является ли она палиндромом.");
+                    System.Console.Write("Введите строку => ");
+                    string? inputString = Convert.ToString(Console.ReadLine());
+                    if (ViewStringPol(inputString))System.Console.WriteLine("Строка является полиндроном");
+                        else System.Console.WriteLine("Строка не является полиндроном");
+                    break;
+                }
+                case 4:
+                {
+                    System.Console.WriteLine("Задача 4*(не обязательная): Задайте строку, состоящую");
+                    System.Console.WriteLine("из слов, разделенных пробелами. Сформировать строку");
+                    System.Console.WriteLine("в которой слова расположены в обратном порядке. В ");
+                    System.Console.WriteLine("полученной строке слова должны быть также разделены пробелами.");
+                    System.Console.Write("Введите строку из слов => ");
+                    string? inputString = Convert.ToString(Console.ReadLine());
+                    System.Console.Write($"Перевернутая строка из слов => {SwapStringWord(inputString)}");
+                    break;
+                }
             }
         }
-
+        public static string SwapStringWord(string str)
+        {
+            string modStr = "";
+            int countChar = 0;
+            for (int i = str.Length-1; i >= 0; i--)
+            {
+                if (((int)str[i] == 32)||(i==0))
+                {
+                    if (i==0)
+                    {
+                        i= -1;
+                        countChar++;
+                    }
+                    /*нашли конец слова, можно скопировать его в конец другой строки*/
+                    for (int j = i+1; j <= i+countChar; j++)
+                    {
+                        modStr += str[j];
+                    }
+                    modStr += " ";
+                    countChar = 0;
+                }
+                else 
+                {
+                    countChar++;
+                } 
+            }
+            return modStr;
+        }
+        public static bool ViewStringPol(string str)
+        {
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str[i] != str[str.Length - i-1])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         public static string ModString(string inputString)
         {
             int length = inputString.Length;
